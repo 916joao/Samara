@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Combinada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        #mensagemContainer {}
+
+        #formularioContainer {
+            display: none;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        button {
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+
+        .sim {
+            background-color: #4CAF50;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .sim:hover {
+            background-color: #45a049;
+        }
+
+        .nao {
+            background-color: #f44336;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .nao:hover {
+            background-color: #d32f2f;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            align-self: flex-start;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            width: 90%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .erro-aviso {
+            background-color: #fffcfc;
+            color: white;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: none;
+        }
+
+        #mensagemAgradecimento {
+            display: none;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+            text-align: left;
+        }
+
+        #mensagemAgradecimento p {
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 95%;
+                margin: 10px auto;
+            }
+
+            button {
+                display: block;
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mensagemContainer">
+        <p>ESSE É UM PRESENTE EXCLUSIVO, TEM CERTEZA QUE FOI PRA VOCÊ E DESEJA ABRÍ-LO?</p>
+        <button class="sim" id="botaoSim">SIM</button>
+        <button class="nao" id="botaoNao">NÃO</button>
+    </div>
+
+    <div class="container" id="formularioContainer">
+        <h1>Página 1/2</h1>
+        <p>SE VOCÊ É REALMENTE ELA, PREENCHA O PEQUENO FORMULÁRIO ABAIXO</p>
+        <form id="meuFormulario">
+            <label for="primeiroNome">Primeiro nome:</label>
+            <input type="text" id="primeiroNome" name="primeiroNome" placeholder="Digite seu primeiro nome">
+
+            <label for="segundoNome">Segundo nome:</label>
+            <input type="text" id="segundoNome" name="segundoNome" placeholder="Digite seu segundo nome">
+
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" placeholder="Digite sua idade">
+
+            <label for="nivelBeleza">Nível de beleza (preencha de 0 a 10):</label>
+            <input type="number" id="nivelBeleza" name="nivelBeleza" min="0" max="10" placeholder="Digite seu nível de beleza">
+
+            <div id="erroNivelBeleza" class="erro-aviso"></div>
+
+            <button type="submit" id="proximaPagina">Próxima Página</button>
+        </form>
+    </div>
+
+    <div class="container" id="mensagemAgradecimento">
+        <p>Gabriel, você sabia?
+Tem gente que brilha sem precisar de holofote. Que encanta só com o jeito de ser, com a calma no olhar, com o sorriso que acolhe. E você é exatamente assim.
+    </div>
+
+    <script>
+        const botaoSim = document.getElementById('botaoSim');
+        const botaoNao = document.getElementById('botaoNao');
+        const mensagemContainer = document.getElementById('mensagemContainer');
+        const formularioContainer = document.getElementById('formularioContainer');
+        const proximaPagina = document.getElementById('proximaPagina');
+        const nivelBelezaInput = document.getElementById('nivelBeleza');
+        const erroNivelBeleza = document.getElementById('erroNivelBeleza');
+        const mensagemAgradecimento = document.getElementById('mensagemAgradecimento');
+
+        botaoSim.addEventListener('click', function () {
+            mensagemContainer.style.display = 'none';
+            formularioContainer.style.display = 'block';
+        });
+
+        botaoNao.addEventListener('click', function () {
+            alert("Hmm... tem certeza que não era pra você? 😢");
+        });
+
+        proximaPagina.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const nivelBeleza = parseInt(nivelBelezaInput.value);
+
+            if (isNaN(nivelBeleza) || nivelBeleza < 11) {
+                alert("❌ Só isso de beleza?\nIsso tá errado??");
+                nivelBelezaInput.value = 999999999;
+                erroNivelBeleza.style.display = 'block';
+            } else {
+                erroNivelBeleza.style.display = 'none';
+                formularioContainer.style.display = 'none';
+                mensagemAgradecimento.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
