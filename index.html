@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -22,13 +22,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 400px;
-        }
-
-        #mensagemContainer {}
-
-        #formularioContainer {
-            display: none;
+            width: 600px;
         }
 
         h1 {
@@ -105,16 +99,33 @@
             display: none;
         }
 
-        #mensagemAgradecimento {
+        #mensagemAgradecimento, #mensagemFinal {
             display: none;
             margin-top: 20px;
             font-size: 16px;
             color: #333;
-            text-align: left;
+            text-align: center;
+            line-height: 1.8;
+            position: relative;
         }
 
-        #mensagemAgradecimento p {
+        #mensagemAgradecimento::before,
+        #mensagemAgradecimento::after {
+            content: "❤️❤️❤️";
+            display: block;
+            font-size: 24px;
             margin-bottom: 10px;
+        }
+
+        #mensagemAgradecimento p,
+        #mensagemFinal p {
+            margin-bottom: 10px;
+        }
+
+        #mensagemFinal img {
+            max-width: 100px;
+            display: block;
+            margin: 20px auto;
         }
 
         @media screen and (max-width: 600px) {
@@ -138,8 +149,8 @@
         <button class="nao" id="botaoNao">NÃO</button>
     </div>
 
-    <div class="container" id="formularioContainer">
-        <h1>Página 1/2</h1>
+    <div class="container" id="formularioContainer" style="display: none;">
+        <h1>Página 1/3</h1>
         <p>SE VOCÊ É REALMENTE ELA, PREENCHA O PEQUENO FORMULÁRIO ABAIXO</p>
         <form id="meuFormulario">
             <label for="primeiroNome">Primeiro nome:</label>
@@ -161,8 +172,17 @@
     </div>
 
     <div class="container" id="mensagemAgradecimento">
-        <p>Gabriel, você sabia?
-Tem gente que brilha sem precisar de holofote. Que encanta só com o jeito de ser, com a calma no olhar, com o sorriso que acolhe. E você é exatamente assim.
+        <p>Eu não sei exatamente como explicar o que você significa para mim, mas sinto que você tem uma forma de me fazer ver as coisas de uma maneira mais positiva, e isso é algo que eu nunca soube que precisava até ter você por perto.
+
+Eu me sinto bem quando estou ao seu lado, mesmo quando as coisas não estão tão fáceis, a sua presença já faz uma diferença enorme. E saiba que estou sempre aqui para te apoiar também, você pode contar comigo para enfrentar qualquer coisa.
+
+Meu carinho e admiração por você crescem continuamente, a cada novo dia. Quanto mais eu te conheço, mais eu percebo o quanto você é especial.</p>
+        <button id="botaoFinal">Próxima Página</button>
+    </div>
+
+    <div class="container" id="mensagemFinal">
+        <p>Obrigado por ser você. Eu gosto tanto de você… mais do que palavras conseguem dizer.</p>
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDR3anZjcGhoNmJzcmU0MzRpaG02cTdmNTc4bXR6N3Z5Y3J0d2FvcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RB46T9ysjzDEs/giphy.gif" alt="I love you gif">
     </div>
 
     <script>
@@ -174,6 +194,8 @@ Tem gente que brilha sem precisar de holofote. Que encanta só com o jeito de se
         const nivelBelezaInput = document.getElementById('nivelBeleza');
         const erroNivelBeleza = document.getElementById('erroNivelBeleza');
         const mensagemAgradecimento = document.getElementById('mensagemAgradecimento');
+        const mensagemFinal = document.getElementById('mensagemFinal');
+        const botaoFinal = document.getElementById('botaoFinal');
 
         botaoSim.addEventListener('click', function () {
             mensagemContainer.style.display = 'none';
@@ -186,7 +208,6 @@ Tem gente que brilha sem precisar de holofote. Que encanta só com o jeito de se
 
         proximaPagina.addEventListener('click', function (event) {
             event.preventDefault();
-
             const nivelBeleza = parseInt(nivelBelezaInput.value);
 
             if (isNaN(nivelBeleza) || nivelBeleza < 11) {
@@ -199,10 +220,14 @@ Tem gente que brilha sem precisar de holofote. Que encanta só com o jeito de se
                 mensagemAgradecimento.style.display = 'block';
             }
         });
+
+        botaoFinal.addEventListener('click', function () {
+            mensagemAgradecimento.style.display = 'none';
+            mensagemFinal.style.display = 'block';
+        });
     </script>
 </body>
 </html>
-
 
 
 
