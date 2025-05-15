@@ -15,7 +15,6 @@
             height: 100vh;
             background-color: #f0f0f0;
         }
-
         .container {
             background-color: #fff;
             padding: 20px;
@@ -24,18 +23,15 @@
             text-align: center;
             width: 600px;
         }
-
         h1 {
             font-size: 20px;
             margin-bottom: 20px;
         }
-
         p {
             margin-bottom: 20px;
             font-size: 16px;
             line-height: 1.5;
         }
-
         button {
             padding: 12px 25px;
             border-radius: 5px;
@@ -45,39 +41,32 @@
             transition: background-color 0.3s ease;
             border: none;
         }
-
         .sim {
             background-color: #4CAF50;
             color: white;
             margin-right: 10px;
         }
-
         .sim:hover {
             background-color: #45a049;
         }
-
         .nao {
             background-color: #f44336;
             color: white;
             margin-left: 10px;
         }
-
         .nao:hover {
             background-color: #d32f2f;
         }
-
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         label {
             font-size: 14px;
             margin-bottom: 5px;
             align-self: flex-start;
         }
-
         input[type="text"],
         input[type="number"],
         input[type="date"] {
@@ -88,7 +77,6 @@
             border-radius: 4px;
             font-size: 14px;
         }
-
         .erro-aviso {
             background-color: #fffcfc;
             color: white;
@@ -98,17 +86,14 @@
             font-size: 14px;
             display: none;
         }
-
-        #mensagemAgradecimento, #mensagemFinal {
+        #mensagemAgradecimento, #mensagemFinal, #paginaExtra, #paginaMusica {
             display: none;
             margin-top: 20px;
             font-size: 16px;
             color: #333;
             text-align: center;
             line-height: 1.8;
-            position: relative;
         }
-
         #mensagemAgradecimento::before,
         #mensagemAgradecimento::after {
             content: "❤️❤️❤️";
@@ -116,24 +101,26 @@
             font-size: 24px;
             margin-bottom: 10px;
         }
-
-        #mensagemAgradecimento p,
-        #mensagemFinal p {
-            margin-bottom: 10px;
-        }
-
         #mensagemFinal img {
             max-width: 100px;
             display: block;
             margin: 20px auto;
         }
-
+        a {
+            display: block;
+            margin: 10px 0;
+            font-size: 16px;
+            color: #1a0dab;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
         @media screen and (max-width: 600px) {
             .container {
                 width: 95%;
                 margin: 10px auto;
             }
-
             button {
                 display: block;
                 width: 100%;
@@ -150,7 +137,7 @@
     </div>
 
     <div class="container" id="formularioContainer" style="display: none;">
-        <h1>Página 1/3</h1>
+        <h1>Página 1/4</h1>
         <p>SE VOCÊ É REALMENTE ELA, PREENCHA O PEQUENO FORMULÁRIO ABAIXO</p>
         <form id="meuFormulario">
             <label for="primeiroNome">Primeiro nome:</label>
@@ -183,6 +170,14 @@ Meu carinho e admiração por você crescem continuamente, a cada novo dia. Quan
     <div class="container" id="mensagemFinal">
         <p>Obrigado por ser você. Eu gosto tanto de você… mais do que palavras conseguem dizer.</p>
         <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDR3anZjcGhoNmJzcmU0MzRpaG02cTdmNTc4bXR6N3Z5Y3J0d2FvcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RB46T9ysjzDEs/giphy.gif" alt="I love you gif">
+        <button id="botaoMusica">Próxima Página</button>
+    </div>
+
+    <div class="container" id="paginaMusica">
+        <h1>Página 4/4</h1>
+        <p>Para relaxar, escute alguma dessas duas músicas:</p>
+        <a href="https://www.youtube.com/watch?v=OMbXuJVeuGs" target="_blank">🎵 Reginaldo Rossi - Mon Amour, Meu Bem, Ma Femme</a>
+        <a href="https://www.youtube.com/watch?v=Qc4UI8kAI4E" target="_blank">🎶 FLÁVIO JOSÉ - Seu Olhar Não Mente</a>
     </div>
 
     <script>
@@ -196,6 +191,8 @@ Meu carinho e admiração por você crescem continuamente, a cada novo dia. Quan
         const mensagemAgradecimento = document.getElementById('mensagemAgradecimento');
         const mensagemFinal = document.getElementById('mensagemFinal');
         const botaoFinal = document.getElementById('botaoFinal');
+        const botaoMusica = document.getElementById('botaoMusica');
+        const paginaMusica = document.getElementById('paginaMusica');
 
         botaoSim.addEventListener('click', function () {
             mensagemContainer.style.display = 'none';
@@ -225,9 +222,15 @@ Meu carinho e admiração por você crescem continuamente, a cada novo dia. Quan
             mensagemAgradecimento.style.display = 'none';
             mensagemFinal.style.display = 'block';
         });
+
+        botaoMusica.addEventListener('click', function () {
+            mensagemFinal.style.display = 'none';
+            paginaMusica.style.display = 'block';
+        });
     </script>
 </body>
 </html>
+
 
 
 
